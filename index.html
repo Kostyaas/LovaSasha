@@ -41,15 +41,17 @@
         }
         .button {
             position: absolute;
-            top: 50%;
+            bottom: -40px;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
-            background: white;
+            transform: translateX(-50%) rotate(0);
+            background: linear-gradient(45deg, #ffb6c1, #ff69b4);
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
+            color: white;
+            font-weight: bold;
         }
         .message {
             display: none;
@@ -61,16 +63,20 @@
             color: white;
             text-align: center;
             opacity: 0;
-            animation: fadeIn 1s forwards;
+            animation: popUp 1s forwards;
         }
-        @keyframes fadeIn {
-            from {
+        @keyframes popUp {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
                 opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
             }
-            to {
-                opacity: 1;
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
                 transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
             }
         }
         .heart-container {
@@ -107,7 +113,7 @@
         function showMessage() {
             const message = document.querySelector('.message');
             message.style.display = 'block';
-            message.style.animation = 'fadeIn 1s forwards';
+            message.style.animation = 'popUp 1s forwards';
         }
         function createFallingHeart() {
             const heart = document.createElement('div');
