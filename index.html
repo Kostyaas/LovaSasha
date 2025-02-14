@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валентинка</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+        .heart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: red;
+            transform: rotate(-45deg);
+            box-shadow: -10px 10px 90px rgba(0, 0, 0, 0.2);
+        }
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: red;
+            border-radius: 50%;
+        }
+        .heart:before {
+            top: -100px;
+            left: 0;
+        }
+        .heart:after {
+            left: 100px;
+            top: 0;
+        }
+        .button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .message {
+            display: none;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: white;
+            text-align: center;
+        }
+        .heart-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .falling-heart {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh);
+            }
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container"></div>
+    <div class="heart">
+        <button class="button" onclick="showMessage()">Нажми на меня</button>
+        <div class="message">💖 С Днём Святого Валентина! 💖</div>
+    </div>
+    <script>
+        function showMessage() {
+            document.querySelector('.message').style.display = 'block';
+        }
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.querySelector('.heart-container').appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createFallingHeart, 300);
+    </script>
+</body>
+</html>
