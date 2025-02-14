@@ -31,45 +31,55 @@
                 opacity: 0;
             }
         }
+        /* Страница 1 */
         .valentine {
             position: relative;
             width: 300px;
-            height: 200px;
-            background: white;
+            height: 400px;
+            background: url('valentine_background.jpg') no-repeat center center/cover;
+            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             border-radius: 10px;
+        }
+        .bookmark {
+            position: absolute;
+            bottom: 20px;
+            background: pink;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        /* Страница 2 */
+        .valentine.open {
+            background: white;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
             border: 2px solid black;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         .comp-text {
             font-size: 24px;
             font-weight: bold;
             color: red;
             text-align: center;
-            margin-bottom: 20px;
             position: relative;
+            margin-bottom: 20px;
         }
         .comp-text::after {
             content: "❤️";
             position: absolute;
-            bottom: -20px;
+            bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 40px;
             animation: pulse 1.5s ease-in-out infinite;
-        }
-        .bookmark {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: pink;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
         }
         .back-button {
             position: absolute;
@@ -102,14 +112,15 @@
     </style>
 </head>
 <body>
+    <!-- Первая страница с изображением -->
     <div class="valentine" onclick="openValentine()">
-        <div class="comp-text">Я люблю тебя!</div>
-        <div class="bookmark">Нажми на меня</div>
+        <div class="bookmark">Открой меня</div>
     </div>
 
     <script>
         function openValentine() {
             const valentine = document.querySelector('.valentine');
+            valentine.classList.add('open');
             valentine.innerHTML = `
                 <div class="comp-text">Я люблю тебя!</div>
                 <div class="back-button" onclick="closeValentine(event)">← Вернуться</div>
@@ -117,11 +128,11 @@
         }
 
         function closeValentine(event) {
-            event.stopPropagation(); 
+            event.stopPropagation(); // Чтобы клик по кнопке не закрывал Валентинку
             const valentine = document.querySelector('.valentine');
+            valentine.classList.remove('open');
             valentine.innerHTML = `
-                <div class="comp-text">Я люблю тебя!</div>
-                <div class="bookmark">Нажми на меня</div>
+                <div class="bookmark">Открой меня</div>
             `;
         }
 
