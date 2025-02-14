@@ -6,7 +6,7 @@
     <title>Валентинка</title>
     <style>
         body {
-            background: url('background.png') no-repeat center center/cover;
+            background: pink;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -14,17 +14,76 @@
             overflow: hidden;
             margin: 0;
         }
+        .falling-heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
         .valentine {
             position: relative;
             width: 300px;
             height: 400px;
-            background: url('valentine_closed.jpg') no-repeat center center/cover;
+            background: url('valentine_closed.png') no-repeat center center/cover;
             cursor: pointer;
             transition: transform 1s;
         }
         .valentine.open {
-            background: url('valentine_open.png') no-repeat center center/cover;
+            background: white;
             transform: rotateY(180deg);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
+            border: 2px solid black;
+        }
+        .page {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .heart3D {
+            width: 100px;
+            height: 100px;
+            background: red;
+            transform: rotate(-45deg);
+            position: relative;
+            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .heart3D:before, .heart3D:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+        }
+        .heart3D:before {
+            top: -50px;
+            left: 0;
+        }
+        .heart3D:after {
+            left: 50px;
+            top: 0;
+        }
+        .comp-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            text-align: center;
         }
         .bookmark {
             position: absolute;
@@ -36,44 +95,35 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .message {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: white;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-        }
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
     </style>
 </head>
 <body>
     <div class="valentine" onclick="openValentine()">
         <div class="bookmark">Нажми на меня</div>
-        <div class="message">💖 С Днём Святого Валентина! 💖</div>
     </div>
     <script>
         function openValentine() {
             const valentine = document.querySelector('.valentine');
-            const message = document.querySelector('.message');
             valentine.classList.add('open');
-            setTimeout(() => {
-                message.style.display = 'block';
-            }, 1000);
+            valentine.innerHTML = `
+                <div class="page">
+                    <div class="heart3D"></div>
+                </div>
+                <div class="page">
+                    <div class="comp-text">Ты самая лучшая! ❤️<br> Я люблю тебя! 💖<br> Ты мое счастье! 😊</div>
+                </div>
+            `;
         }
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createFallingHeart, 300);
     </script>
 </body>
 </html>
