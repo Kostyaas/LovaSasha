@@ -19,6 +19,7 @@
             color: red;
             font-size: 24px;
             animation: fall linear infinite;
+            bottom: 10px;
         }
         @keyframes fall {
             from {
@@ -34,9 +35,12 @@
             position: relative;
             width: 300px;
             height: 400px;
-            background: url('valentine_closed.png') no-repeat center center/cover;
+            background: url('valentine_background.jpg') no-repeat center center/cover;
             cursor: pointer;
             transition: transform 1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .valentine.open {
             background: white;
@@ -84,6 +88,7 @@
             font-weight: bold;
             color: black;
             text-align: center;
+            transform: rotateY(180deg);
         }
         .bookmark {
             position: absolute;
