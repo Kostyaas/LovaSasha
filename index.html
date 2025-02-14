@@ -100,20 +100,6 @@
             font-weight: bold;
             cursor: pointer;
         }
-        .back-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: pink;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .back-button::before {
-            content: '<-';
-            font-size: 18px;
-        }
     </style>
 </head>
 <body>
@@ -129,21 +115,10 @@
                     <div class="heart3D"></div>
                 </div>
                 <div class="page">
-                    <div class="comp-text"><br> Я люблю тебя!<br></div>
-                    <div class="back-button" onclick="closeValentine(event)">← Вернуться</div>
+                    <div class="comp-text"><br> Я люблю тебя! 💖<br></div>
                 </div>
             `;
         }
-
-        function closeValentine(event) {
-            event.stopPropagation(); // Чтобы клик по кнопке не закрывал Валентинку
-            const valentine = document.querySelector('.valentine');
-            valentine.classList.remove('open');
-            valentine.innerHTML = `
-                <div class="bookmark">Нажми на меня</div>
-            `;
-        }
-
         function createFallingHeart() {
             const heart = document.createElement('div');
             heart.classList.add('falling-heart');
@@ -157,3 +132,4 @@
     </script>
 </body>
 </html>
+
