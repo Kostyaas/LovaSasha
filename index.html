@@ -31,55 +31,74 @@
                 opacity: 0;
             }
         }
-        /* Страница 1 */
         .valentine {
             position: relative;
             width: 300px;
             height: 400px;
             background: url('valentine_background.jpg') no-repeat center center/cover;
             cursor: pointer;
+            transition: transform 1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .valentine.open {
+            background: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
+            border: 2px solid black;
+        }
+        .page {
+            width: 50%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            border-radius: 10px;
+        }
+        .heart3D {
+            width: 100px;
+            height: 100px;
+            background: red;
+            transform: rotate(-45deg);
+            position: relative;
+            box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .heart3D:before, .heart3D:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+        }
+        .heart3D:before {
+            top: -50px;
+            left: 0;
+        }
+        .heart3D:after {
+            left: 50px;
+            top: 0;
+        }
+        .comp-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+            transform: rotateY(180deg);
         }
         .bookmark {
             position: absolute;
-            bottom: 20px;
+            top: 20px;
+            right: 20px;
             background: pink;
             padding: 10px;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
-        }
-        /* Страница 2 */
-        .valentine.open {
-            background: white;
-            transform: rotateY(180deg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            border: 2px solid black;
-        }
-        .comp-text {
-            font-size: 24px;
-            font-weight: bold;
-            color: red;
-            text-align: center;
-            position: relative;
-            margin-bottom: 20px;
-        }
-        .comp-text::after {
-            content: "❤️";
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 40px;
-            animation: pulse 1.5s ease-in-out infinite;
         }
         .back-button {
             position: absolute;
@@ -95,35 +114,24 @@
             content: '<-';
             font-size: 18px;
         }
-        @keyframes pulse {
-            0% {
-                transform: translateX(-50%) scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: translateX(-50%) scale(1.2);
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateX(-50%) scale(1);
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Первая страница с изображением -->
     <div class="valentine" onclick="openValentine()">
-        <div class="bookmark">Открой меня</div>
+        <div class="bookmark">Нажми на меня</div>
     </div>
-
     <script>
         function openValentine() {
             const valentine = document.querySelector('.valentine');
             valentine.classList.add('open');
             valentine.innerHTML = `
-                <div class="comp-text">Я люблю тебя!</div>
-                <div class="back-button" onclick="closeValentine(event)">← Вернуться</div>
+                <div class="page">
+                    <div class="heart3D"></div>
+                </div>
+                <div class="page">
+                    <div class="comp-text"><br> Я люблю тебя!<br></div>
+                    <div class="back-button" onclick="closeValentine(event)">← Вернуться</div>
+                </div>
             `;
         }
 
@@ -132,7 +140,7 @@
             const valentine = document.querySelector('.valentine');
             valentine.classList.remove('open');
             valentine.innerHTML = `
-                <div class="bookmark">Открой меня</div>
+                <div class="bookmark">Нажми на меня</div>
             `;
         }
 
