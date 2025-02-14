@@ -100,6 +100,15 @@
             font-weight: bold;
             cursor: pointer;
         }
+        .back-arrow {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            font-size: 30px;
+            cursor: pointer;
+            transform: translateY(-50%);
+            color: black;
+        }
     </style>
 </head>
 <body>
@@ -107,6 +116,8 @@
         <div class="bookmark">Нажми на меня</div>
     </div>
     <script>
+        let currentPage = 1; // Страница, на которой сейчас находимся
+
         function openValentine() {
             const valentine = document.querySelector('.valentine');
             valentine.classList.add('open');
@@ -116,9 +127,19 @@
                 </div>
                 <div class="page">
                     <div class="comp-text"><br> Я люблю тебя! 💖<br></div>
+                    <div class="back-arrow" onclick="goBack()">←</div>
                 </div>
             `;
         }
+
+        function goBack() {
+            const valentine = document.querySelector('.valentine');
+            valentine.classList.remove('open');
+            valentine.innerHTML = `
+                <div class="bookmark">Нажми на меня</div>
+            `;
+        }
+
         function createFallingHeart() {
             const heart = document.createElement('div');
             heart.classList.add('falling-heart');
@@ -132,4 +153,3 @@
     </script>
 </body>
 </html>
-
