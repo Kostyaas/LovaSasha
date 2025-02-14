@@ -60,11 +60,24 @@
             font-size: 20px;
             color: white;
             text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
         }
         .heart-container {
             position: absolute;
             width: 100%;
             height: 100%;
+            pointer-events: none;
         }
         .falling-heart {
             position: absolute;
@@ -75,9 +88,11 @@
         @keyframes fall {
             from {
                 transform: translateY(-100vh);
+                opacity: 1;
             }
             to {
                 transform: translateY(100vh);
+                opacity: 0;
             }
         }
     </style>
@@ -90,18 +105,20 @@
     </div>
     <script>
         function showMessage() {
-            document.querySelector('.message').style.display = 'block';
+            const message = document.querySelector('.message');
+            message.style.display = 'block';
+            message.style.animation = 'fadeIn 1s forwards';
         }
         function createFallingHeart() {
             const heart = document.createElement('div');
             heart.classList.add('falling-heart');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
             document.querySelector('.heart-container').appendChild(heart);
             setTimeout(() => heart.remove(), 5000);
         }
-        setInterval(createFallingHeart, 300);
+        setInterval(createFallingHeart, 200);
     </script>
 </body>
 </html>
